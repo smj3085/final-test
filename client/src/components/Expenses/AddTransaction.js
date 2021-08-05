@@ -1,6 +1,7 @@
 import React, {useState, useContext} from 'react'
 import { GlobalContext } from '../Expenses/context/GlobalState';
 import { Button, Form } from 'semantic-ui-react';
+import { Message } from 'semantic-ui-react';
 
 export const AddTransaction = () => {
   const [text, setText] = useState('');
@@ -22,6 +23,7 @@ export const AddTransaction = () => {
 
   return (
     <>
+    <Message>
       <h3>Add new transaction</h3>
       <Form onSubmit={onSubmit}>
         <Form.Field>
@@ -29,12 +31,13 @@ export const AddTransaction = () => {
         <input type='text' value={text} onChange={(e) => setText(e.target.value)} placeholder="Enter item..." />
         </Form.Field>
         <Form.Field>
-        <label>Amount(negative - expense, positive - income)
+        <label>Amount(e.g. -250 for expense)
         </label>
         <input type='number' value={amount} onChange={(e) => setAmount(e.target.value)} placeholder="Enter amount..." />
         </Form.Field>
-        <Button className='btn' type='sumbit'> Add transaction</Button>
+        <Button className='btn' color='teal' type='sumbit'> Add transaction</Button>
       </Form>
+      </Message>
     </>
   )
 }

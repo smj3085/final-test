@@ -1,5 +1,7 @@
 import React, { useContext } from 'react';
 import { GlobalContext } from '../Expenses/context/GlobalState';
+import { FaRegSmile, FaRegSadTear } from 'react-icons/fa';
+import { Message } from 'semantic-ui-react';
 
 //Money formatter function
 function moneyFormatter(num) {
@@ -32,15 +34,12 @@ export const IncomeExpenses = () => {
   );
 
   return (
-    <div className="inc-exp-container">
-        <div>
-          <h4>Income</h4>
-  <p className="money plus">{moneyFormatter(income)}</p>
-        </div>
-        <div>
-          <h4>Expense</h4>
-  <p className="money minus">{moneyFormatter(expense)}</p>
-        </div>
-      </div>
+    <Message className="income-expenses-container">
+        <Message.Header><FaRegSmile /> Income</Message.Header>
+        <h2 className="money plus" style={{color:'green'}}>{moneyFormatter(income)}</h2>
+        <br />
+        <Message.Header><FaRegSadTear /> Expenses</Message.Header>
+        <h2 className="money minus" style={{color:'red'}}>{moneyFormatter(expense)}</h2>
+    </Message>
   )
 }

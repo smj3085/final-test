@@ -1,5 +1,6 @@
 import React, {useContext} from 'react';
 import { GlobalContext } from '../Expenses/context/GlobalState';
+import { Table , Button} from 'semantic-ui-react';
 
 //Money formatter function
 function moneyFormatter(num) {
@@ -23,8 +24,21 @@ export const Transaction = ({ transaction }) => {
   const sign = transaction.amount < 0 ? '-' : '+';
 
   return (
-    <li className={transaction.amount < 0 ? 'minus' : 'plus'}>
-      {transaction.text} <span>{sign}{moneyFormatter(transaction.amount)}</span><button onClick={() => deleteTransaction(transaction.id)} className="delete-btn">x</button>
-    </li>
+    <>
+    <Table celled className={transaction.amount < 0 ? 'minus' : 'plus'}>
+      
+
+      <Table.Body>
+        <Table.Row>
+          <Table.Cell width='six'>{transaction.text}</Table.Cell>
+          <Table.Cell width='six'>{sign}{moneyFormatter(transaction.amount)}</Table.Cell>
+          <Table.Cell width='six'></Table.Cell>
+          <Button onClick={() => deleteTransaction(transaction.id)} className="delete-btn">Delete</Button>
+        </Table.Row>
+      </Table.Body>
+
+    </Table>
+    </>
+    
   )
 }

@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { GlobalContext } from '../Expenses/context/GlobalState';
+import { Message } from 'semantic-ui-react';
 
 //Money formatter function
 function moneyFormatter(num) {
@@ -26,8 +27,11 @@ export const Balance = () => {
 
   return (
     <>
-      <h4>Your Balance</h4>
-    <h1>{moneyFormatter(total)}</h1>
+    <Message className='balance-message'>
+      <Message.Header>Your Balance</Message.Header>
+    
+      <h1>{moneyFormatter(total)}</h1>
+    </Message>
     </>
   )
 }

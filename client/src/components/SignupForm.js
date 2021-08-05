@@ -1,58 +1,68 @@
 import React, { useState } from 'react';
-import Auth from '../utils/auth';
 // import { Form, Button, Alert } from 'react-bootstrap';
-import { ADD_USER } from '../utils/mutations';
-import { useMutation } from '@apollo/react-hooks';
-import { Button, Form, Grid, Header, Segment } from 'semantic-ui-react';
-import { Alert } from 'react-bootstrap';
-
+import { Button, Form, Grid, Header, Segment, Message } from 'semantic-ui-react';
+import { createUser } from '../utils/API';
+import Auth from '../utils/auth';
 
 const SignupForm = () => {
-    const [addUser, { error }] = useMutation(ADD_USER);
-   
-    const [userFormData, setUserFormData] = useState({ username: '', email: '', password: '' });
-  
-    const [validated] = useState(false);
-   
-    const [showAlert, setShowAlert] = useState(false);
+  // set initial form state
+  const [userFormData, setUserFormData] = useState({ username: '', email: '', password: '' });
+  // set state for form validation
+  const [validated] = useState(false);
+  // set state for alert
+  const [showAlert, setShowAlert] = useState(false);
 
-    const handleInputChange = (event) => {
-        const { name, value } = event.target;
-        setUserFormData({ ...userFormData, [name]: value });
-    };
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setUserFormData({ ...userFormData, [name]: value });
+  };
 
-    const handleFormSubmit = async event => {
-        event.preventDefault();
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
 
-        try {
-            const { data } = await addUser({
-                variables: {...userFormData}
-            });
+    // check if form has everything (as per react-bootstrap docs)
+    const form = event.currentTarget;
+    if (form.checkValidity() === false) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
 
-            Auth.login(data.addUser.token);
-        } catch (error) {
-            console.error(error);
-            setShowAlert(true);
-        }
+    try {
+      const response = await createUser(userFormData);
 
-        setUserFormData({
-            username: '',
-            email: '',
-            password: '',
-        });
-    };
+      if (!response.ok) {
+        throw new Error('something went wrong!');
+      }
 
-    return (
-        <>
-           <Grid textAlign='center' style={{ height: '80vh' }} verticalAlign='middle'>
+      const { token, user } = await response.json();
+      console.log(user);
+      Auth.login(token);
+    } catch (err) {
+      console.error(err);
+      setShowAlert(true);
+    }
+
+    setUserFormData({
+      username: '',
+      email: '',
+      password: '',
+    });
+  };
+
+  return (
+    <>
+    <Grid textAlign='center' style={{ height: '80vh' }} verticalAlign='middle'>
     <Grid.Column style={{ maxWidth: 450 }}>
       <Header as='h2' color='black' textAlign='center'>
         Create a new account
       </Header>
+      {/* This is needed for the validation functionality above */}
       <Form size='large' noValidate validated={validated} onSubmit={handleFormSubmit}>
-        <Alert dismissible onClose={() => setShowAlert(false)} show={showAlert} variant='danger'>
-            Something went wrong with your signup!
-        </Alert>
+        {/* show alert if server response is bad */}
+        <Message negative dismissible onClose={() => setShowAlert(false)} show={showAlert} variant='danger'>
+          Something went wrong with your signup!
+        </Message>
+
         <Segment stacked>
             <Form.Input 
             htmlFor='username'
@@ -91,14 +101,12 @@ const SignupForm = () => {
           type='submit' color='yellow' fluid size='large'>
             Signup
           </Button>
-          {error && <div>Sign up failed</div>}
-        </Segment>
+          </Segment>
       </Form>
     </Grid.Column>
   </Grid>
-  </>
-
-    );
+    </>
+  );
 };
 
 export default SignupForm;

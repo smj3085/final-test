@@ -25,17 +25,17 @@ const AppNavbar = () => {
               {/* if user is logged in show all tabs and logout */}
               {Auth.loggedIn() ? (
                 <>
-                  <Nav.Link as={Link} to='/saved'>
+                  <Nav.Link style={{color:'black'}} as={Link} to='/saved'>
                     Dashboard
                   </Nav.Link>
               
-                  <Nav.Link as={Link} to='/wishlist'>
+                  <Nav.Link style={{color:'black'}} as={Link} to='/wishlist'>
                     Wishlist
                   </Nav.Link>
-                  <Nav.Link as={Link} to='/expenses'>
+                  <Nav.Link style={{color:'black'}} as={Link} to='/expenses'>
                     Expenses
                   </Nav.Link>
-                  <Nav.Link onClick={Auth.logout}>Logout</Nav.Link>
+                  <Nav.Link style={{color:'black'}} onClick={Auth.logout}>Logout</Nav.Link>
                 </>
               ) : (
                 <Nav.Link style={{color:'black'}} onClick={() => setShowModal(true)}>Login/Sign Up</Nav.Link>

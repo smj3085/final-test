@@ -1,6 +1,5 @@
 import React from 'react'
 import {
-	Button,
 	Grid,
 	Header,
 	Message,
@@ -18,7 +17,7 @@ return (
             Whether you're travelling a new country or adventuring in your own backyard, capture all your travel memories in one place. <br />
 			      Wherever you are today... or tomorrow...
           </p>
-          <Button color='yellow'>Sign up today!</Button>
+          <strong style={{backgroundColor:'yellow'}}>Sign up today!</strong>
         </Message>
       </Grid.Column>
     </Grid.Row>

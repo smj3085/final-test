@@ -15,7 +15,7 @@ return (
           <Header as='h1'>Travel the world or your own backyard!</Header>
           <p>
             Whether you're travelling a new country or adventuring in your own backyard, capture all your travel memories in one place. <br />
-			Wherever you are today... or tomorrow...
+			      Wherever you are today... or tomorrow...
           </p>
           <Button color='yellow'>Sign up today!</Button>
         </Message>

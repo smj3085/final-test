@@ -9,6 +9,7 @@ import {
 export default function LandingPage() {
 return (
 	<>
+  <Grid  verticalAlign='middle'  columns={4} centered>
 	 <Grid.Row className="jumbotron">
       <Grid.Column>
         <Message>
@@ -21,6 +22,7 @@ return (
         </Message>
       </Grid.Column>
     </Grid.Row>
+    </Grid>
 	</>
 );
 }

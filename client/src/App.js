@@ -8,6 +8,8 @@ import SearchBooks from './pages/SearchBooks';
 import SavedBooks from './pages/SavedBooks';
 import Home from './pages/Home';
 import Expenses from './pages/Expenses';
+import Dashboard from './pages/Dashboard';
+import AddNewEntryForm from './components/Dashboard/AddNewEntry';
 
 const client = new ApolloClient({
     request: operation => {
@@ -31,6 +33,8 @@ function App() {
                     <Navbar />
                     <Route exact path='/' component={Home} />
                     <Switch>
+                        <Route exact path='/dashboard' component={Dashboard} />
+                        <Route exact path='/addnew' component={AddNewEntryForm} />
                         <Route exact path='/search' component={SearchBooks} />
                         <Route exact path='/saved' component={SavedBooks} />
                         <Route exact path='/expenses' component={Expenses} />

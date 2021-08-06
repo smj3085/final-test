@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Button, Header, Icon, Modal, Form, FormField, FormGroup, Rating, Grid, Segment, TextArea } from 'semantic-ui-react'
 import {RiUserLocationLine} from 'react-icons/ri';
 import ImageUploading from 'react-images-uploading';
-import {Redirect} from 'react-router-dom';
 
 
 const AddNewEntryForm = () => {
@@ -11,7 +10,7 @@ const AddNewEntryForm = () => {
     const [place] = useState('');
     const [date] = useState('');
     const [description] = useState('');
-    const [rating] = useState('');
+    // const [rating] = useState('');
 
     
     const [images, setImages] = useState('');

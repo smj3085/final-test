@@ -13,7 +13,7 @@ const AppNavbar = () => {
 
   return (
     <>
-      <Navbar  className='topnav' expand='md' sticky='top'>
+      <Navbar  className='topnav' expand='md'>
         <Container fluid>
           <Navbar.Brand as={Link} to='/' className='btn btn-lg text-black'>
             <FaPlaneDeparture />
@@ -25,7 +25,7 @@ const AppNavbar = () => {
               {/* if user is logged in show all tabs and logout */}
               {Auth.loggedIn() ? (
                 <>
-                  <Nav.Link style={{color:'black'}} as={Link} to='/saved'>
+                  <Nav.Link style={{color:'black'}} as={Link} to='/dashboard'>
                     Dashboard
                   </Nav.Link>
               

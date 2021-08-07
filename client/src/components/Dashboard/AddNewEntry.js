@@ -1,145 +1,134 @@
 import React, { useState } from 'react';
-import { Button, Header, Icon, Modal, Form, FormField, FormGroup, Rating, Grid, Segment, TextArea } from 'semantic-ui-react'
-import {RiUserLocationLine} from 'react-icons/ri';
-import ImageUploading from 'react-images-uploading';
+import { Link } from 'react-router-dom';
+import { useMutation } from '@apollo/client';
 
+import { Grid, Segment, Form, Modal, Button, TextArea, FormGroup, Rating, Icon } from 'semantic-ui-react';
+import {RiUserLocationLine} from 'react-icons/ri';
+
+import { ADD_ENTRY } from '../../utils/mutations';
+import { QUERY_ENTRIES } from '../../utils/queries';
+
+import Auth from '../../utils/auth';
 
 const AddNewEntryForm = () => {
-   
-    const [title] = useState('');
-    const [place] = useState('');
-    const [date] = useState('');
-    const [description] = useState('');
-    // const [rating] = useState('');
+  const [formState, setFormState] = useState({ entryText: '', entryPlace: '', startDate: '', endDate: ''})
 
+  const [addEntry] = useMutation(ADD_ENTRY, {
+    update(cache, { data: { addEntry } }) {
+      try {
+        const { entries } = cache.readQuery({ query: QUERY_ENTRIES });
+
+        cache.writeQuery({
+          query: QUERY_ENTRIES,
+          data: { entries: [addEntry, ...entries] },
+        });
+      } catch (e) {
+        console.error(e);
+      }
+    },
+  });
+
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+
+    try {
+      const { data } = await addEntry({
+        variables: {...formState },
+      });
+
+      Auth.login(data.login.token);
+    } catch (e) {
+      console.error(e);
+    }
+
+    setFormState({
+      entryText: '',
+      entryPlace: '',
+      startDate: '',
+      endDate: '',
+    });
+  };
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+
+    setFormState({
+      ...formState,
+      [name]: value,
+    });
+  };
+
+    return (
+        <>
+        <Grid fluid textAlign='center'>
+            <Grid.Column style={{ maxWidth: 1000, padding: '50px'}}>
+            <h1 color='black' textAlign='center'>
+                <RiUserLocationLine/>Your new entry!
+            </h1>
+
+            <Form size='large' onSubmit={handleFormSubmit}>
+            <Segment stacked>
+              <Form.Field>
+                <label htmlFor='place'>Place</label>
+                <input 
+                  placeholder='Where did you go?'
+                  name='place'
+                  onChange={handleChange}
+                  value={formState.place}
+                  required
+                />
+              </Form.Field>
+              <Form.Field>
+                <label htmlFor='startDate'>Start Date</label>
+                <input 
+                  placeholder='When did you first arrive?'
+                  name='startDate'
+                  onChange={handleChange}
+                  value={formState.startDate}
+                  required
+                />
+              </Form.Field>
+              <Form.Field>
+                <label htmlFor='endDate'>End Date</label>
+                <input 
+                  placeholder='When did you leave?'
+                  name='endDate'
+                  onChange={handleChange}
+                  value={formState.endDate}
+                  required
+                />
+              </Form.Field>
+              <Form.Field>
+              <label htmlFor='description'>Description</label>
+              <TextArea
+                  placeholder='Tell me more!'
+                  name='description'
+                  onChange={handleChange}
+                  value={formState.description}
+                  required
+                />
+                </Form.Field>
     
-    const [images, setImages] = useState('');
-    const maxNumber = 69;
+             
+              <FormGroup>
+                <label htmlFor="rating">Rating?</label>
+                <Rating icon='heart' name='rating' defaultRating={1} maxRating={5} />
+              </FormGroup>
 
-    const onChange = (imageList, addUpdateIndex) => {
-        // data for submit
-        console.log(imageList, addUpdateIndex);
-        setImages(imageList);
-    };
-
-
-
-
-return (
-    <>
-    <Grid fluid textAlign='center'>
-        <Grid.Column style={{ maxWidth: 450, padding: '50px'}}>
-          <Header as='h2' color='black' textAlign='center'>
-              <RiUserLocationLine/>Your new entry!
-
-          </Header>
-        <Segment stacked>
-            <Form>
-                <FormField>
-                    <label htmlFor="tile">Title</label>
-                    <input 
-                        type="text" 
-                        autoComplete="off" 
-                        placeholder="Title"
-                        name="title"
-                        value={title}
-                        // onChange={e => {setName(e.target.value)}}
-                    />
-                </FormField>
-                
-                <FormField>
-                    <label htmlFor="place">Place</label>
-                    <input 
-                        type="text" 
-                        autoComplete="off" 
-                        placeholder="Place"
-                        name="place"
-                        value={place}
-                    />
-                </FormField>
-            
-                <FormField>
-                    <label htmlFor="date">Date</label>
-                    <input 
-                        type="text" 
-                        autoComplete="off" 
-                        placeholder="date"
-                        name="date"
-                        value={date}
-                    />
-                </FormField>
-
-                <FormField>
-                    <label htmlFor="description">Description</label>
-                    <TextArea 
-                        type="text" 
-                        autoComplete="off" 
-                        placeholder="description"
-                        name="description"
-                        value={description}
-                    />
-                </FormField>
-                <FormGroup>
-                <ImageUploading
-                    multiple
-                    value={images}
-                    onChange={onChange}
-                    maxNumber={maxNumber}
-                    dataURLKey="data_url"
-                >
-                    {({
-                    imageList,
-                    onImageUpload,
-                    onImageRemoveAll,
-                    onImageUpdate,
-                    onImageRemove,
-                    isDragging,
-                    dragProps,
-                    }) => (
-                    // write your building UI
-                    <div className="upload__image-wrapper">
-                        <Button color='yellow'
-                        style={isDragging ? { color: 'red' } : undefined}
-                        onClick={onImageUpload}
-                        {...dragProps}
-                        >
-                        Click or Drop here
-                        </Button>
-                        &nbsp;
-                        <Button color='teal' onClick={onImageRemoveAll}>Remove all images</Button>
-                        {imageList.map((image, index) => (
-                        <div key={index} className="image-item">
-                            <img src={image['data_url']} alt="" width="100" />
-                            <div className="image-item__btn-wrapper">
-                            <button onClick={() => onImageUpdate(index)}>Update</button>
-                            <button onClick={() => onImageRemove(index)}>Remove</button>
-                            </div>
-                        </div>
-                        ))}
-                    </div>
-                    )}
-                </ImageUploading>
-                </FormGroup>
-                <FormGroup>
-                    <label htmlFor="rating">Rating?</label>
-                    <Rating icon='heart' name='rating' defaultRating={1} maxRating={5} />
-                </FormGroup>
+            </Segment>
             </Form>
-        </Segment>
-        <Modal.Actions>
-            <Button color='yellow'>
-                <Icon name='checkmark' /> Create entry
-            </Button>
-            <Button color='teal' >
-                Cancel
-            </Button>
-        </Modal.Actions>
-    </Grid.Column>
-    </Grid>
-
-
-    </>
-    )
+            <Modal.Actions>
+                <Button color='yellow'>
+                    <Icon name='checkmark' /> Create entry
+                </Button>
+                <Link to='/dashboard' className='btn' color='teal' >
+                    Cancel
+                </Link>
+            </Modal.Actions>
+            </Grid.Column>
+        </Grid>
+        </>
+    );
 };
 
 export default AddNewEntryForm;

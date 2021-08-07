@@ -1,11 +1,20 @@
-import React, { useState }  from 'react';
+import React from 'react';
+import { useQuery } from '@apollo/client';
+import { Link } from 'react-router-dom';
+
+import EntryList from '../components/Dashboard/EntryList';
+
 import { Segment, Header, Container } from 'semantic-ui-react';
 import { FaSuitcaseRolling } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+
+import { QUERY_ENTRIES } from '../utils/queries';
 
 // import {RiUserLocationLine} from 'react-icons/ri';
 
 const Dashboard = () => {
+  const { data } = useQuery(QUERY_ENTRIES);
+  const entries = data?.entries || [];
+
 
     return (
         <>
@@ -14,10 +23,11 @@ const Dashboard = () => {
 
             <Header as='h1'>Map</Header>
             <p>Where have you been!</p>
+            <Container className='dashboardImg'>Map photo</Container>
             <Header as='h1'>Previous entries</Header>
-            {/* Entry list */}
-
-            
+            <EntryList
+              entries={entries}
+              title="Your Entries!" />
            
         </Segment>
         </>

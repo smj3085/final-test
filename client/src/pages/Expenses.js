@@ -13,7 +13,7 @@ import {FaMoneyBill} from 'react-icons/fa';
 function Expenses() {
   return (
     <GlobalProvider>
-      <Segment className="expenses-container" style={{padding:'50px'}}>
+      <Segment className="expenses-container jumbotron" style={{padding:'50px'}}>
         <Header />
         <Grid columns={2} relaxed='very' stackable>
             <Grid.Column>

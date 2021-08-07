@@ -5,7 +5,7 @@ import {
 	Message,
   } from 'semantic-ui-react'
 
-export default function LandingPage() {
+function LandingPage() {
 return (
 	<>
   <Grid  verticalAlign='middle'  columns={4} centered>
@@ -25,3 +25,5 @@ return (
 	</>
 );
 }
+
+export default LandingPage;

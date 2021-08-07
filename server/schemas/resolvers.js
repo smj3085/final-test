@@ -42,8 +42,16 @@ const resolvers = {
 
       return { token, user };
     },
-    addEntry: async (parent, { entryText, entryAuthor, entryPlace, createdDate, startDate, endDate  }) => {
-      const entry = await Entry.create({ entryText, entryAuthor, entryPlace, createdDate, startDate, endDate  });
+    addEntry: async (parent, 
+      { entryText, entryAuthor, entryPlace, createdDate, startDate, endDate  }) => {
+      const entry = await Entry.create({ 
+        entryText, 
+        entryAuthor, 
+        entryPlace, 
+        createdDate, 
+        startDate, 
+        endDate  
+      });
 
       await User.findOneAndUpdate(
         { username: entryAuthor },

@@ -18,7 +18,7 @@ const Footer = () => {
           </button>
         )}
         <h6>
-          Developed by Travel with me <FaPlane />
+          Developed by TravelBlog <FaPlane />
         </h6>
       </div>
     </footer>

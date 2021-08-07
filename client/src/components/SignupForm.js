@@ -14,7 +14,7 @@ const Signup = () => {
     email: '',
     password: '',
   });
-  const [addUser, { error, data }] = useMutation(ADD_USER);
+  const [addUser, { error }] = useMutation(ADD_USER);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -92,6 +92,11 @@ const Signup = () => {
             </Button>
           </Segment>
         </Form>
+        {error && (
+              <div className="my-3 p-3 bg-danger text-white">
+                {error.message}
+              </div>
+            )}
     </Grid.Column>
   </Grid>
     </>

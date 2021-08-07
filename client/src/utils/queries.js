@@ -6,37 +6,43 @@ export const QUERY_USER = gql`
       _id
       username
       email
-      thoughts {
+      entries {
         _id
-        thoughtText
+        entryText
+        entryAuthor
+        entryPlace
         createdAt
+        startDate
+        endDate
       }
     }
   }
 `;
 
-export const QUERY_THOUGHTS = gql`
-  query getThoughts {
-    thoughts {
+export const QUERY_ENTRIES = gql`
+  query getEntries {
+    entries {
       _id
-      thoughtText
-      thoughtAuthor
+      entryText
+      entryAuthor
+      entryPlace
       createdAt
+      startDate
+      endDate
     }
   }
 `;
 
-export const QUERY_SINGLE_THOUGHT = gql`
-  query getSingleThought($thoughtId: ID!) {
-    thought(thoughtId: $thoughtId) {
-      _id
-      thoughtText
-      thoughtAuthor
+export const QUERY_SINGLE_ENTRY = gql`
+  query getSingleEntry($entryId: ID!) {
+    entry(entryId: $entryId) {
+      __id
+      entryText
+      entryAuthor
+      entryPlace
       createdAt
-      comments {
-        _id
-        commentText
-        createdAt
+      startDate
+      endDate
       }
     }
   }

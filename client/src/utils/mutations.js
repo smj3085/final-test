@@ -29,13 +29,11 @@ export const ADD_ENTRY = gql`
     addEntry(entryText: $entryText, entryAuthor: $entryAuthor) {
       _id
       entryText
+      entryPlace
       entryAuthor
       createdDate
       startDate
       endDate
-      entryPlace
-
-      }
     }
   }
 `;

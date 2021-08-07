@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt');
 
 // import schema from Book.js
 const bookSchema = require('./Book');
+const placeSchema = require('./Place');
 
 const userSchema = new Schema(
   {
@@ -23,6 +24,7 @@ const userSchema = new Schema(
     },
     // set savedBooks to be an array of data that adheres to the bookSchema
     savedBooks: [bookSchema],
+    savedPlaces: [placeSchema]
   },
   // set this to use virtual below
   {
@@ -50,6 +52,10 @@ userSchema.methods.isCorrectPassword = async function (password) {
 // when we query a user, we'll also get another field called `bookCount` with the number of saved books we have
 userSchema.virtual('bookCount').get(function () {
   return this.savedBooks.length;
+});
+
+userSchema.virtual('placeCount').get(function () {
+  return this.savedPlaces.length;
 });
 
 const User = model('User', userSchema);

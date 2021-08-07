@@ -1,52 +1,43 @@
 import React, { useState } from 'react';
-// import { Form, Button, Alert } from 'react-bootstrap';
-import { Button, Form, Grid, Header, Segment, Message } from 'semantic-ui-react';
-import { createUser } from '../utils/API';
+
+import { useMutation } from '@apollo/client';
+import { ADD_USER } from '../utils/mutations';
+
 import Auth from '../utils/auth';
 
-const SignupForm = () => {
-  // set initial form state
-  const [userFormData, setUserFormData] = useState({ username: '', email: '', password: '' });
-  // set state for form validation
-  const [validated] = useState(false);
-  // set state for alert
-  const [showAlert, setShowAlert] = useState(false);
+import { Button, Form, Grid, Header, Segment } from 'semantic-ui-react';
 
-  const handleInputChange = (event) => {
+
+const Signup = () => {
+  const [formState, setFormState] = useState({
+    username: '',
+    email: '',
+    password: '',
+  });
+  const [addUser, { error, data }] = useMutation(ADD_USER);
+
+  const handleChange = (event) => {
     const { name, value } = event.target;
-    setUserFormData({ ...userFormData, [name]: value });
+
+    setFormState({
+      ...formState,
+      [name]: value,
+    });
   };
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-
-    // check if form has everything (as per react-bootstrap docs)
-    const form = event.currentTarget;
-    if (form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
-    }
+    console.log(formState);
 
     try {
-      const response = await createUser(userFormData);
+      const { data } = await addUser({
+        variables: { ...formState },
+      });
 
-      if (!response.ok) {
-        throw new Error('something went wrong!');
-      }
-
-      const { token, user } = await response.json();
-      console.log(user);
-      Auth.login(token);
-    } catch (err) {
-      console.error(err);
-      setShowAlert(true);
+      Auth.login(data.addUser.token);
+    } catch (e) {
+      console.error(e);
     }
-
-    setUserFormData({
-      username: '',
-      email: '',
-      password: '',
-    });
   };
 
   return (
@@ -57,11 +48,9 @@ const SignupForm = () => {
         Create a new account
       </Header>
       {/* This is needed for the validation functionality above */}
-      <Form size='large' noValidate validated={validated} onSubmit={handleFormSubmit}>
+      <Form size='large' onSubmit={handleFormSubmit}>
         {/* show alert if server response is bad */}
-        <Message negative dismissible onClose={() => setShowAlert(false)} show={showAlert} variant='danger'>
-          Something went wrong with your signup!
-        </Message>
+  
 
         <Segment stacked>
             <Form.Input 
@@ -70,8 +59,8 @@ const SignupForm = () => {
             iconPosition='left' 
             placeholder='Your Name'
             name='username'
-            onChange={handleInputChange}
-            value={userFormData.username}
+            onChange={handleChange}
+            value={formState.username}
             required
             />   
             <Form.Input 
@@ -81,8 +70,8 @@ const SignupForm = () => {
                 placeholder='E-mail address'
                 name='email'
                 type='email'
-                onChange={handleInputChange}
-                value={userFormData.email}
+                onChange={handleChange}
+                value={formState.email}
                 required
                  />
             <Form.Input
@@ -91,22 +80,22 @@ const SignupForm = () => {
                 placeholder='Password'
                 type='password'
                 name='password'
-                onChange={handleInputChange}
-                value={userFormData.password}
+                onChange={handleChange}
+                value={formState.password}
                 required
             />
 
-          <Button 
-          disabled={!(userFormData.username && userFormData.email && userFormData.password)}
-          type='submit' color='yellow' fluid size='large'>
-            Signup
-          </Button>
+            <Button 
+            disabled={!(formState.username && formState.email && formState.password)}
+            type='submit' color='yellow' fluid size='large'>
+              Signup
+            </Button>
           </Segment>
-      </Form>
+        </Form>
     </Grid.Column>
   </Grid>
     </>
   );
 };
 
-export default SignupForm;
+export default Signup;

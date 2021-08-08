@@ -29,8 +29,8 @@ const AppNavbar = () => {
                     Dashboard
                   </Nav.Link>
               
-                  <Nav.Link style={{color:'black'}} as={Link} to='/wishlist'>
-                    Wishlist
+                  <Nav.Link style={{color:'black'}} as={Link} to='/tripplanner'>
+                    Trip planner
                   </Nav.Link>
                   <Nav.Link style={{color:'black'}} as={Link} to='/expenses'>
                     Expenses

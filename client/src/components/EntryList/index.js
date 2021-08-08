@@ -13,7 +13,7 @@ const EntryList = ({ thoughts, title }) => {
     <Segment>
 
       <Header as='h1'>{title}</Header>
-      <Grid>
+      <Grid style={{marginLeft: 30, padding: 10}}>
       {thoughts &&
         thoughts.map((thought) => (
           <Card key={thought._id} className="entry-cards">

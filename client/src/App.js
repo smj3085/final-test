@@ -10,12 +10,10 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
-import SearchBooks from './pages/SearchBooks';
-import SavedBooks from './pages/SavedBooks';
 import Home from './pages/Home';
 import Expenses from './pages/Expenses';
 import Dashboard from './pages/Dashboard';
-import Wishlist from './pages/Wishlist';
+import TripPlanner from './pages/Wishlist';
 import SingleThought from './pages/SingleThought';
 
 
@@ -53,9 +51,7 @@ function App() {
                     <Switch>
                         <Route exact path='/dashboard' component={Dashboard} />
                         <Route exact path='/expenses' component={Expenses} />
-                        <Route exact path='/searchBooks' component={SearchBooks} />
-                        <Route exact path='/savedBooks' component={SavedBooks} />
-                        <Route exact path='/wishlist' component={Wishlist} />
+                        <Route exact path='/tripplanner' component={TripPlanner} />
                         <Route exact path="/thoughts/:thoughtId">
               <SingleThought />
             </Route>

@@ -36,7 +36,7 @@ const SavedPlaces = () => {
     getUserData();
   }, [userDataLength]);
 
-  // create function that accepts the book's mongo _id value as param and deletes the book from the database
+  // create function that accepts the place's mongo _id value as param and deletes the place from the database
   const handleDeletePlace = async (place_id) => {
     const token = Auth.loggedIn() ? Auth.getToken() : null;
 
@@ -53,7 +53,7 @@ const SavedPlaces = () => {
 
       const updatedUser = await response.json();
       setUserData(updatedUser);
-      // upon success, remove book's id from localStorage
+      // upon success, remove place's id from localStorage
       removePlaceId(place_id);
     } catch (err) {
       console.error(err);

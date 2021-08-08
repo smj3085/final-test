@@ -30,28 +30,6 @@ export const loginUser = (userData) => {
   });
 };
 
-// save book data for a logged in user
-export const saveBook = (bookData, token) => {
-  return fetch('/api/users', {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json',
-      authorization: `Bearer ${token}`,
-    },
-    body: JSON.stringify(bookData),
-  });
-};
-
-// remove saved book data for a logged in user
-export const deleteBook = (bookId, token) => {
-  return fetch(`/api/users/books/${bookId}`, {
-    method: 'DELETE',
-    headers: {
-      authorization: `Bearer ${token}`,
-    },
-  });
-};
-
 // Places
 export const savePlace = (placeData, token) => {
   return fetch('/api/users', {
@@ -64,9 +42,9 @@ export const savePlace = (placeData, token) => {
   });
 };
 
-// remove saved book data for a logged in user
+// remove saved place data for a logged in user
 export const deletePlace = (place_id, token) => {
-  return fetch(`/api/users/books/${place_id}`, {
+  return fetch(`/api/users/places/${place_id}`, {
     method: 'DELETE',
     headers: {
       authorization: `Bearer ${token}`,

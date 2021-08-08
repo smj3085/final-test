@@ -23,7 +23,7 @@ const SearchPlaces = () => {
     return () => savePlaceIds(savedPlaceIds);
   });
 
-  // create method to search for books and set state on form submit
+  // create method to search for places and set state on form submit
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 

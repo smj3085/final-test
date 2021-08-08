@@ -4,7 +4,7 @@ import { useMutation } from '@apollo/client';
 import { ADD_THOUGHT } from '../../utils/mutations';
 import { QUERY_THOUGHTS } from '../../utils/queries';
 
-import {Header, Form, Grid, Button, Segment, TextArea, Container, Rating } from 'semantic-ui-react';
+import {Header, Form, Grid, Button, Segment, TextArea, Container, Rating, Icon } from 'semantic-ui-react';
 
 
 
@@ -76,6 +76,7 @@ const EntryForm = () => {
       {Auth.loggedIn() ? (
           <Grid textAlign='center' verticalAlign='middle'>
           <Grid.Column>
+          <Icon name='globe' size='large'></Icon>
             <Header as='h2' color='black' textAlign='center'>
             Where did you go?
             </Header>

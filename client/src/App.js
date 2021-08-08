@@ -14,7 +14,7 @@ import Home from './pages/Home';
 import Expenses from './pages/Expenses';
 import Dashboard from './pages/Dashboard';
 import TripPlanner from './pages/Wishlist';
-import SingleThought from './pages/SingleThought';
+import SingleEntry from './pages/SingleEntry';
 
 
 // Construct our main GraphQL API endpoint
@@ -53,7 +53,7 @@ function App() {
                         <Route exact path='/expenses' component={Expenses} />
                         <Route exact path='/tripplanner' component={TripPlanner} />
                         <Route exact path="/thoughts/:thoughtId">
-              <SingleThought />
+                        <SingleEntry />
             </Route>
 
 

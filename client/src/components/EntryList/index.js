@@ -1,23 +1,23 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import {Header, Card, Grid, Image, Segment, Button } from 'semantic-ui-react';
+import {Header, Card, Image, Segment, Button } from 'semantic-ui-react';
 
-import { image } from '../../images/blue.jpg';
+import image from '../../images/cityline.jpg';
 const EntryList = ({ thoughts, title }) => {
   if (!thoughts.length) {
-    return <h3>No Thoughts Yet</h3>;
+    return <h3>No entries yet</h3>;
   }
 
   return (
     <Segment>
 
       <Header as='h1'>{title}</Header>
-      <Grid style={{marginLeft: 30, padding: 10}}>
+      <Card.Group itemsPerRow={5}>
       {thoughts &&
         thoughts.map((thought) => (
           <Card key={thought._id} className="entry-cards">
-            <Image src={image}/>
+            <Image src={image} size='large' center/>
             <Card.Content>
               <Card.Header>{thought.thoughtPlace}</Card.Header>
               <Card.Meta>
@@ -38,7 +38,7 @@ const EntryList = ({ thoughts, title }) => {
           </Card>
 
         ))}
-      </Grid>
+      </Card.Group>
 
 
     </Segment>

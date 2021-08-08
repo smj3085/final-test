@@ -5,7 +5,7 @@ import Auth from '../../utils/auth';
 import { getNearbyPlaces, savePlace, searchLocation, getPlaceInfo } from '../../utils/API';
 import { savePlaceIds, getSavedPlaceIds } from '../../utils/localStorage';
 
-import {Segment, Form, Card, Button, Header, Grid, Image } from 'semantic-ui-react';
+import {Segment, Form, Card, Button, Header, Image } from 'semantic-ui-react';
 
 
 const SearchPlaces = () => {
@@ -101,6 +101,7 @@ const SearchPlaces = () => {
           <Form.Field>
             <input 
               name='searchInput'
+              icon='search'
               value={searchInput}
               onChange={(e) => setSearchInput(e.target.value)}
               type='text'
@@ -113,7 +114,7 @@ const SearchPlaces = () => {
       </Segment>
 
       <Segment>
-        <Grid>
+        <Card.Group itemsPerRow={4}>
           {searchedPlaces.map((place) => {
             return (
               <Card key={place.place_id}>
@@ -124,10 +125,10 @@ const SearchPlaces = () => {
                   <Card.Header>{place.name}</Card.Header>
                   <Card.Meta></Card.Meta>
                   <Card.Description>{place.description}</Card.Description>
-                  <div>
-                    <Button color='teal' onClick={`(${place.wikipedia})`}>Wikipedia</Button>
-                    <br />
+                  
                   {Auth.loggedIn() && (
+                    <div>
+                    <Button color='teal' onClick={`(${place.wikipedia})`}>Wikipedia</Button>
                     <Button color='yellow'
                       disabled={savedPlaceIds?.some((savedPlaceId) => savedPlaceId === place.place_id)}
                       onClick={() => handleSavePlace(place.place_id)}>
@@ -135,13 +136,14 @@ const SearchPlaces = () => {
                         ? 'This place has already been saved!'
                         : 'Save this place!'}
                     </Button>
+                    </div>
                   )}
-                   </div>
+                   
                 </Card.Content>
               </Card>
             );
           })}
-        </Grid>
+        </Card.Group>
       </Segment>
     </>
   );

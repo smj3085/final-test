@@ -14,6 +14,7 @@ const Home = () => {
   return (
     <Segment>
       <div>
+        
           <EntryForm />
         </div>
         <div>

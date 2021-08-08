@@ -8,6 +8,7 @@ import SavedPlaces from '../components/Wishlist/SavedWishlist';
 const Wishlist = () => {
     return (
         <>
+    
         <Segment className='wishlist' style={{padding:'50px'}}>
             <SearchPlaces />
             <SavedPlaces />

@@ -9,6 +9,7 @@ import { savePlaceIds, getSavedPlaceIds } from '../../utils/localStorage';
 
 const SearchPlaces = () => {
   // create state for holding returned google api data
+
   const [searchedPlaces, setSearchedPlaces] = useState([]);
   // create state for holding our search field data
   const [searchInput, setSearchInput] = useState('');
@@ -36,9 +37,13 @@ const SearchPlaces = () => {
         throw new Error('something went wrong!');
       }
 
-      const { items } = await response.json();
+      const jsonData = await response.json();
+      console.log(jsonData)
 
-      const placeData = items.map((place) => ({
+
+      const data = jsonData.candidates;
+
+      const placeData = data.map((place) => ({
         placeId: place.place_id,
         name: place.name, 
         type: place.types,

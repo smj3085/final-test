@@ -5,7 +5,7 @@ import EntryList from '../components/EntryList';
 import EntryForm from '../components/EntryForm';
 
 import { QUERY_THOUGHTS } from '../utils/queries';
-import { Segment } from 'semantic-ui-react';
+import { Segment, Grid } from 'semantic-ui-react';
 
 const Home = () => {
   const { loading, data } = useQuery(QUERY_THOUGHTS);

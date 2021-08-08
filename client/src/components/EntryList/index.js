@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import {Header, Card, Grid, Image, Segment, Button } from 'semantic-ui-react';
 
-const image = '../../images/blue.jpg';
+import { image } from '../../images/blue.jpg';
 const EntryList = ({ thoughts, title }) => {
   if (!thoughts.length) {
     return <h3>No Thoughts Yet</h3>;
@@ -13,19 +13,18 @@ const EntryList = ({ thoughts, title }) => {
     <Segment>
 
       <Header as='h1'>{title}</Header>
-      <Grid column={3}>
-        <Grid.Column>
+      <Grid>
       {thoughts &&
         thoughts.map((thought) => (
           <Card key={thought._id} className="entry-cards">
-            <Image src={image} wrapped ui={false} />
+            <Image src={image}/>
             <Card.Content>
               <Card.Header>{thought.thoughtPlace}</Card.Header>
               <Card.Meta>
                 <span className='vistDate'>Visited on {thought.visitDate}</span>
               </Card.Meta>
               <Card.Description>
-                {thought.thoughtText}
+                {thought.entryText}
               </Card.Description>
             </Card.Content>
             <Card.Content extra>
@@ -37,9 +36,8 @@ const EntryList = ({ thoughts, title }) => {
             </Button>
             </Card.Content>
           </Card>
-        ))}
 
-</Grid.Column>
+        ))}
       </Grid>
 
 

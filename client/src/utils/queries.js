@@ -42,3 +42,24 @@ export const QUERY_SINGLE_THOUGHT = gql`
     }
   }
 `;
+
+export const QUERY_SEARCH = gql`
+  query placeSearch($placenName: String, $placeType: String, $address: String, $rating: String) {
+    placeSearch(placeName: $placeName, placeType: $placeType, rating: $rating) {
+      rating
+      place {
+        placeName
+        placeAddress
+        placeType
+        _id
+        review {
+          rating
+        }
+      }
+      user {
+        username
+        email
+      }
+    }
+  }
+  `

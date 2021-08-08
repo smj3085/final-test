@@ -4,7 +4,9 @@ import { useMutation } from '@apollo/client';
 import { ADD_THOUGHT } from '../../utils/mutations';
 import { QUERY_THOUGHTS } from '../../utils/queries';
 
-import {Header, Form, Grid, Button, Image, Segment, TextArea, Container, Rating } from 'semantic-ui-react';
+import {Header, Form, Grid, Button, Segment, TextArea, Container, Rating } from 'semantic-ui-react';
+
+
 
 import Auth from '../../utils/auth';
 
@@ -113,7 +115,7 @@ const EntryForm = () => {
               <Button color='yellow'  type="submit">
                 Add entry
               </Button>
-              <Button color='teal'  type="submit">
+              <Button color='teal'>
                 Upload photo
               </Button>
             </div>
@@ -122,7 +124,7 @@ const EntryForm = () => {
               <Rating icon='heart' defaultRating={1} maxRating={5}/>
             
             {error && (
-              <div className="col-12 my-3 bg-danger text-white p-3">
+              <div>
                 {error.message}
               </div>
             )}

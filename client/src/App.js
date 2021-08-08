@@ -17,7 +17,8 @@ import SavedPlaces from './components/Wishlist/SavedWishlist';
 import Home from './pages/Home';
 import Expenses from './pages/Expenses';
 import Dashboard from './pages/Dashboard';
-import AddNewEntryForm from './components/Dashboard/AddNewEntry';
+import Wishlist from './pages/Wishlist';
+import SingleThought from './pages/SingleThought';
 
 
 // Construct our main GraphQL API endpoint
@@ -53,12 +54,16 @@ function App() {
                     <Route exact path='/' component={Home} />
                     <Switch>
                         <Route exact path='/dashboard' component={Dashboard} />
-                        <Route exact path='/addnew' component={AddNewEntryForm} />
                         <Route exact path='/search' component={SearchPlaces} />
                         <Route exact path='/saved' component={SavedPlaces} />
                         <Route exact path='/expenses' component={Expenses} />
                         <Route exact path='/searchBooks' component={SearchBooks} />
                         <Route exact path='/savedBooks' component={SavedBooks} />
+                        <Route exact path='/wishlist' component={Wishlist} />
+                        <Route exact path="/thoughts/:thoughtId">
+              <SingleThought />
+            </Route>
+
 
                     
                     </Switch>

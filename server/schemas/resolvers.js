@@ -1,21 +1,21 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Entry } = require('../models');
+const { User, Thought } = require('../models');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
   Query: {
     users: async () => {
-      return User.find().populate('entries');
+      return User.find().populate('thoughts');
     },
     user: async (parent, { username }) => {
-      return User.findOne({ username }).populate('entries');
+      return User.findOne({ username }).populate('thoughts');
     },
-    entries: async (parent, { username }) => {
+    thoughts: async (parent, { username }) => {
       const params = username ? { username } : {};
-      return Entry.find(params).sort({ createdAt: -1 });
+      return Thought.find(params).sort({ createdAt: -1 });
     },
-    entry: async (parent, { entryId }) => {
-      return Entry.findOne({ _id: entryId });
+    thought: async (parent, { thoughtId }) => {
+      return Thought.findOne({ _id: thoughtId });
     },
   },
 
@@ -42,29 +42,21 @@ const resolvers = {
 
       return { token, user };
     },
-    addEntry: async (parent, 
-      { entryText, entryAuthor, entryPlace, createdDate, startDate, endDate  }) => {
-      const entry = await Entry.create({ 
-        entryText, 
-        entryAuthor, 
-        entryPlace, 
-        createdDate, 
-        startDate, 
-        endDate  
-      });
+    addThought: async (parent, { entryText, thoughtPlace, visitDate, thoughtAuthor }) => {
+      const thought = await Thought.create({ entryText, thoughtPlace, visitDate, thoughtAuthor });
 
       await User.findOneAndUpdate(
-        { username: entryAuthor },
-        { $addToSet: { entries: entry._id } }
+        { username: thoughtAuthor },
+        { $addToSet: { thoughts: thought._id } }
       );
 
-      return entry;
+      return thought;
     },
-
-    removeEntry: async (parent, { entryId }) => {
-      return Entry.findOneAndDelete({ _id: entryId });
+    
+    removeThought: async (parent, { thoughtId }) => {
+      return Thought.findOneAndDelete({ _id: thoughtId });
     },
-
+    
   },
 };
 

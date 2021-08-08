@@ -6,44 +6,39 @@ export const QUERY_USER = gql`
       _id
       username
       email
-      entries {
+      thoughts {
         _id
         entryText
-        entryAuthor
-        entryPlace
+        visitDate
+        thoughtPlace
         createdAt
-        startDate
-        endDate
       }
     }
   }
 `;
 
-export const QUERY_ENTRIES = gql`
-  query getEntries {
-    entries {
+export const QUERY_THOUGHTS = gql`
+  query getThoughts {
+    thoughts {
       _id
       entryText
-      entryAuthor
-      entryPlace
+      thoughtPlace
+      visitDate
+      thoughtAuthor
       createdAt
-      startDate
-      endDate
     }
   }
 `;
 
-export const QUERY_SINGLE_ENTRY = gql`
-  query getSingleEntry($entryId: ID!) {
-    entry(entryId: $entryId) {
-      __id
+export const QUERY_SINGLE_THOUGHT = gql`
+  query getSingleThought($thoughtId: ID!) {
+    thought(thoughtId: $thoughtId) {
+      _id
       entryText
-      entryAuthor
-      entryPlace
+      visitDate
+      thoughtPlace
+      thoughtAuthor
       createdAt
-      startDate
-      endDate
-      }
     }
   }
 `;

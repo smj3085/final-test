@@ -82,7 +82,7 @@ const SearchPlaces = () => {
 
   return (
     <>
-      <Container fluid className='text-light bg-dark'>
+      <Container fluid className='text-dark'>
         <Container>
           <h1>Search for Places!</h1>
           <Form onSubmit={handleFormSubmit}>

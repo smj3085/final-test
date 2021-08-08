@@ -12,8 +12,6 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import SearchBooks from './pages/SearchBooks';
 import SavedBooks from './pages/SavedBooks';
-import SearchPlaces from './components/Wishlist/SearchWishlist';
-import SavedPlaces from './components/Wishlist/SavedWishlist';
 import Home from './pages/Home';
 import Expenses from './pages/Expenses';
 import Dashboard from './pages/Dashboard';
@@ -54,8 +52,6 @@ function App() {
                     <Route exact path='/' component={Home} />
                     <Switch>
                         <Route exact path='/dashboard' component={Dashboard} />
-                        <Route exact path='/search' component={SearchPlaces} />
-                        <Route exact path='/saved' component={SavedPlaces} />
                         <Route exact path='/expenses' component={Expenses} />
                         <Route exact path='/searchBooks' component={SearchBooks} />
                         <Route exact path='/savedBooks' component={SavedBooks} />

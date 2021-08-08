@@ -74,20 +74,10 @@ export const deletePlace = (place_id, token) => {
   });
 };
 
-// make a search to google books api
-// https://www.googleapis.com/books/v1/volumes?q=harry+potter
-export const searchGoogleBooks = (query) => {
-  return fetch(`https://www.googleapis.com/books/v1/volumes?q=${query}`);
-};
 
-export const API_KEY = process.env.REACT_APP_MAPBOX_API_KEY;
-
-// Search google Places api
-export const searchGooglePlaces = (query) => 
-  return fetch(`https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${query}&inputtype=textquery&fields=photos,formatted_address,types,name,rating,opening_hours,geometry&key=AIzaSyCoGgSgLoXGPZ4se1qgXEpsMe7dR51DF_c`);
-};
 
 export const OPEN_TRIP_MAP_API_KEY = '5ae2e3f221c38a28845f05b6cb924c4cb6d3d351c88b787c265e7507';
+// export const OPEN_TRIP_MAP_API_KEY = process.env.REACT_APP_MAPBOX_API_KEY;
 
 export const searchLocation = (query) => {
   return fetch(`https://api.opentripmap.com/0.1/en/places/geoname?name=${query}&apikey=${OPEN_TRIP_MAP_API_KEY}`)

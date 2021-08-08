@@ -2,14 +2,14 @@ import React from 'react';
 import { Segment } from 'semantic-ui-react';
 
 
-import SearchPlaces from '../components/Wishlist/SearchWishlist';
-import SavedPlaces from '../components/Wishlist/SavedWishlist';
+import SearchPlaces from '../components/Wishlist/SearchTripPlanner';
+import SavedPlaces from '../components/Wishlist/SavedTripPlanner';
 
-const Wishlist = () => {
+const TripPlanner = () => {
     return (
         <>
     
-        <Segment className='wishlist' style={{padding:'50px'}}>
+        <Segment className='tripPlanner' style={{padding:'50px'}}>
             <SearchPlaces />
             <SavedPlaces />
         </Segment>
@@ -17,4 +17,4 @@ const Wishlist = () => {
     );
 };
 
-export default Wishlist;
+export default TripPlanner;

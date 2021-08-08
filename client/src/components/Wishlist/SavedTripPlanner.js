@@ -37,7 +37,7 @@ const SavedPlaces = () => {
   }, [userDataLength]);
 
   // create function that accepts the book's mongo _id value as param and deletes the book from the database
-  const handleDeletePlace = async (placeId) => {
+  const handleDeletePlace = async (place_id) => {
     const token = Auth.loggedIn() ? Auth.getToken() : null;
 
     if (!token) {
@@ -45,7 +45,7 @@ const SavedPlaces = () => {
     }
 
     try {
-      const response = await deletePlace(placeId, token);
+      const response = await deletePlace(place_id, token);
 
       if (!response.ok) {
         throw new Error('something went wrong!');
@@ -54,7 +54,7 @@ const SavedPlaces = () => {
       const updatedUser = await response.json();
       setUserData(updatedUser);
       // upon success, remove book's id from localStorage
-      removePlaceId(placeId);
+      removePlaceId(place_id);
     } catch (err) {
       console.error(err);
     }
@@ -62,7 +62,7 @@ const SavedPlaces = () => {
 
   // if data isn't here yet, say so
   if (!userDataLength) {
-    return <h2>LOADING...</h2>;
+    return <h2>No entries saved</h2>;
   }
 
   return (
@@ -81,13 +81,12 @@ const SavedPlaces = () => {
         <CardColumns>
           {userData.savedPlaces.map((place) => {
             return (
-              <Card key={place.placeId} border='dark'>
+              <Card key={place.place_id} border='dark'>
                 {place.photo ? <Card.Img src={place.photo} alt={`The photo for ${place.photo}`} variant='top' /> : null}
                 <Card.Body>
                   <Card.Title>{place.name}</Card.Title>
-                  <p className='small'>Type: {place.type}</p>
                   <Card.Text>{place.description}</Card.Text>
-                  <Button className='btn-block btn-danger' onClick={() => handleDeletePlace(place.placeId)}>
+                  <Button className='btn-block btn-danger' onClick={() => handleDeletePlace(place.place_id)}>
                     Delete this place!
                   </Button>
                 </Card.Body>

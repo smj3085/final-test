@@ -35,6 +35,7 @@ const EntryForm = () => {
           entryText,
           thoughtPlace,
           visitDate,
+          thoughtAuthor: Auth.getProfile().data.username,
         },
       });
 

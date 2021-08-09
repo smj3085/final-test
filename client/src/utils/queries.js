@@ -1,24 +1,33 @@
-import { gql } from '@apollo/client';
+import gql from 'graphql-tag';
 
-export const QUERY_USER = gql`
-  query user($username: String!) {
-    user(username: $username) {
+export const GET_ME = gql`
+  {
+    me {
       _id
       username
       email
+      placeCount
+      savedPlaces {
+        place_id
+        name
+        photo
+        description
+        wikipedia
+      }
       thoughts {
         _id
         entryText
-        visitDate
         thoughtPlace
+        visitDate
+        thoughtAuthor
         createdAt
       }
     }
   }
 `;
 
-export const QUERY_THOUGHTS = gql`
-  query getThoughts {
+export const QUERY_ENTRIES = gql`
+  {
     thoughts {
       _id
       entryText
@@ -43,23 +52,23 @@ export const QUERY_SINGLE_THOUGHT = gql`
   }
 `;
 
-export const QUERY_SEARCH = gql`
-  query placeSearch($placenName: String, $placeType: String, $address: String, $rating: String) {
-    placeSearch(placeName: $placeName, placeType: $placeType, rating: $rating) {
-      rating
-      place {
-        placeName
-        placeAddress
-        placeType
-        _id
-        review {
-          rating
-        }
-      }
-      user {
-        username
-        email
-      }
-    }
-  }
-  `
+// export const QUERY_SEARCH = gql`
+//   query placeSearch($placeName: String, $placeType: String, $address: String, $rating: String) {
+//     placeSearch(placeName: $placeName, placeType: $placeType, rating: $rating) {
+//       rating
+//       place {
+//         placeName
+//         placeAddress
+//         placeType
+//         _id
+//         review {
+//           rating
+//         }
+//       }
+//       user {
+//         username
+//         email
+//       }
+//     }
+//   }
+//   `

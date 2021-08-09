@@ -1,13 +1,8 @@
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
-
-import { ADD_THOUGHT } from '../../utils/mutations';
-import { QUERY_THOUGHTS } from '../../utils/queries';
-
+import { ADD_ENTRY } from '../../utils/mutations';
+import { QUERY_ENTRIES } from '../../utils/queries';
 import {Header, Form, Grid, Button, Segment, TextArea, Container, Rating, Icon } from 'semantic-ui-react';
-
-
-
 import Auth from '../../utils/auth';
 
 const EntryForm = () => {
@@ -15,14 +10,15 @@ const EntryForm = () => {
   const [thoughtPlace, setThoughtPlace] = useState('');
   const [visitDate, setVisitDate] = useState('');
 
-  const [addThought, { error }] = useMutation(ADD_THOUGHT, {
+  const [addThought, { error }] = useMutation(ADD_ENTRY, {
     update(cache, { data: { addThought } }) {
       try {
-        const { thoughts } = cache.readQuery({ query: QUERY_THOUGHTS });
+        const { thoughts } = cache.readQuery({ query: QUERY_ENTRIES });
 
         cache.writeQuery({
-          query: QUERY_THOUGHTS,
+          query: QUERY_ENTRIES,
           data: { thoughts: [addThought, ...thoughts] },
+
         });
       } catch (e) {
         console.error(e);

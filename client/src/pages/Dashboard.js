@@ -4,11 +4,11 @@ import { useQuery } from '@apollo/client';
 import EntryList from '../components/EntryList';
 import EntryForm from '../components/EntryForm';
 
-import { QUERY_THOUGHTS } from '../utils/queries';
+import { QUERY_ENTRIES } from '../utils/queries';
 import { Segment } from 'semantic-ui-react';
 
 const Home = () => {
-  const { loading, data } = useQuery(QUERY_THOUGHTS);
+  const { loading, data } = useQuery(QUERY_ENTRIES);
   const thoughts = data?.thoughts || [];
 
   return (

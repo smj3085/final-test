@@ -20,9 +20,8 @@ const placeSchema = new Schema({
     type: String,
     required: true,
   },
-  type: {
+  wikipedia: {
     type: String,
-    required: true,
   },
   user:
   {

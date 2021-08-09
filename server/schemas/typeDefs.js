@@ -18,6 +18,14 @@ const typeDefs = gql`
     createdAt: String
   }
 
+  type Place {
+    place_id: ID!
+    name: String
+    photo: String
+    description: String
+    wikipedia: String
+  }
+
   type Auth {
     token: ID!
     user: User
@@ -35,6 +43,8 @@ const typeDefs = gql`
     login(email: String!, password: String!): Auth
     addThought(entryText: String!, thoughtPlace: String!, visitDate: String!, thoughtAuthor: String!): Thought
     removeThought(thoughtId: ID!): Thought
+    savePlace(input: placeInput!): User
+    removePlace(place_id!): User
   }
 `;
 

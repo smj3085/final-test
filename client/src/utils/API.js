@@ -54,7 +54,7 @@ export const deletePlace = (place_id, token) => {
 
 
 
-export const OPEN_TRIP_MAP_API_KEY = '';
+// export const OPEN_TRIP_MAP_API_KEY = '';
 // export const OPEN_TRIP_MAP_API_KEY = process.env.REACT_APP_MAPBOX_API_KEY;
 
 export const searchLocation = (query) => {

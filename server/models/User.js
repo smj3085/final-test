@@ -1,7 +1,7 @@
 const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
 
-const placeSchema = require('./Place')
+// const thoughtSchema = require('./Entry')
 
 
 const userSchema = new Schema({
@@ -28,14 +28,7 @@ const userSchema = new Schema({
       ref: 'Thought',
     },
   ],
-  savedPlaces: [placeSchema],
-  },
-  {
-    toJSON: {
-      virtuals: true,
-    },
-  }
-);
+});
 
 userSchema.pre('save', async function (next) {
   if (this.isNew || this.isModified('password')) {
@@ -49,10 +42,6 @@ userSchema.pre('save', async function (next) {
 userSchema.methods.isCorrectPassword = async function (password) {
   return bcrypt.compare(password, this.password);
 };
-
-userSchema.virtual('placeCount').get(function () {
-  return this.savedPlaces.length;
-});
 
 const User = model('User', userSchema);
 

@@ -12,7 +12,7 @@ const EntryList = ({ thoughts, title }) => {
   return (
     <Segment>
 
-      <Header as='h1'>{title}</Header>
+      <h1>{title}</h1>
       <Card.Group itemsPerRow={5}>
       {thoughts &&
         thoughts.map((thought) => (

@@ -35,7 +35,6 @@ const EntryForm = () => {
           entryText,
           entryPlace,
           visitDate,
-          thoughtAuthor: Auth.getProfile().data.username,
         },
       });
 
@@ -73,9 +72,9 @@ const EntryForm = () => {
           <Grid textAlign='center' verticalAlign='middle'>
           <Grid.Column>
           <Icon name='globe' size='large'></Icon>
-            <Header as='h2' color='black' textAlign='center'>
+            <h1 as='h2' color='black' textAlign='center'>
             Where did you go?
-            </Header>
+            </h1>
           <Form onSubmit={handleFormSubmit}>
             <Form.Field>
               <input

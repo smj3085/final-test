@@ -14,8 +14,8 @@ const resolvers = {
       const params = username ? { username } : {};
       return Thought.find(params).sort({ createdAt: -1 });
     },
-    thought: async (parent, { entryId }) => {
-      return Thought.findOne({ _id: entryId });
+    thought: async (parent, { thoughtId }) => {
+      return Thought.findOne({ _id: thoughtId });
     },
   },
 

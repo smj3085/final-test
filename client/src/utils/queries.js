@@ -40,8 +40,8 @@ export const QUERY_ENTRIES = gql`
 `;
 
 export const QUERY_SINGLE_THOUGHT = gql`
-  query getSingleThought($entryId: ID!) {
-    thought(entryId: $entryId) {
+  query getSingleThought($thoughtId: ID!) {
+    thought(thoughtId: $thoughtId) {
       _id
       entryText
       visitDate

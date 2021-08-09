@@ -9,7 +9,7 @@ const thoughtSchema = new Schema({
     maxlength: 280,
     trim: true,
   },
-  thoughtPlace: {
+  entryPlace: {
     type: String,
     required: true,
     trim: true,

@@ -14,8 +14,8 @@ const resolvers = {
       const params = username ? { username } : {};
       return Thought.find(params).sort({ createdAt: -1 });
     },
-    thought: async (parent, { thoughtId }) => {
-      return Thought.findOne({ _id: thoughtId });
+    thought: async (parent, { entryId }) => {
+      return Thought.findOne({ _id: entryId });
     },
   },
 
@@ -42,8 +42,8 @@ const resolvers = {
 
       return { token, user };
     },
-    addThought: async (parent, { entryText, thoughtPlace, visitDate, thoughtAuthor }) => {
-      const thought = await Thought.create({ entryText, thoughtPlace, visitDate, thoughtAuthor });
+    addThought: async (parent, { entryText, entryPlace, visitDate, thoughtAuthor }) => {
+      const thought = await Thought.create({ entryText, entryPlace, visitDate, thoughtAuthor });
 
       await User.findOneAndUpdate(
         { username: thoughtAuthor },

@@ -12,7 +12,7 @@ const typeDefs = gql`
   type Thought {
     _id: ID
     entryText: String
-    thoughtPlace: String
+    entryPlace: String
     visitDate: String
     thoughtAuthor: String
     createdAt: String
@@ -33,7 +33,7 @@ const typeDefs = gql`
   type Mutation {
     addUser(username: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
-    addThought(entryText: String!, thoughtPlace: String!, visitDate: String!, thoughtAuthor: String!): Thought
+    addThought(entryText: String!, entryPlace: String!, visitDate: String!, thoughtAuthor: String!): Thought
     removeThought(thoughtId: ID!): Thought
   }
 `;

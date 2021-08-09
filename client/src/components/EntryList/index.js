@@ -19,7 +19,7 @@ const EntryList = ({ thoughts, title }) => {
           <Card key={thought._id} className="entry-cards">
             <Image src={image} size='large' center/>
             <Card.Content>
-              <Card.Header>{thought.thoughtPlace}</Card.Header>
+              <Card.Header>{thought.entryPlace}</Card.Header>
               <Card.Meta>
                 <span className='vistDate'>Visited on {thought.visitDate}</span>
               </Card.Meta>

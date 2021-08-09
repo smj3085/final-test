@@ -24,7 +24,7 @@ const SingleThought = () => {
   }
   return (
     <Segment>
-      <Header as='h1'>{thought.thoughtPlace}</Header>
+      <Header as='h1'>{thought.entryPlace}</Header>
       <p>Visited on {thought.visitDate}</p>
       <Message>
         {thought.entryText}

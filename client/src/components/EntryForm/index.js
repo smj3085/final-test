@@ -7,7 +7,7 @@ import Auth from '../../utils/auth';
 
 const EntryForm = () => {
   const [entryText, setEntryText] = useState('');
-  const [thoughtPlace, setThoughtPlace] = useState('');
+  const [entryPlace, setEntryPlace] = useState('');
   const [visitDate, setVisitDate] = useState('');
 
   const [addThought, { error }] = useMutation(ADD_ENTRY, {
@@ -33,14 +33,14 @@ const EntryForm = () => {
       const { data } = await addThought({
         variables: {
           entryText,
-          thoughtPlace,
+          entryPlace,
           visitDate,
           thoughtAuthor: Auth.getProfile().data.username,
         },
       });
 
       setEntryText('');
-      setThoughtPlace('');
+      setEntryPlace('');
       setVisitDate('');
     } catch (err) {
       console.error(err);
@@ -50,8 +50,8 @@ const EntryForm = () => {
   const handleChange = (event) => {
     const { name, value } = event.target;
 
-    if (name === 'thoughtPlace' && value.length <= 280) {
-      setThoughtPlace(value);
+    if (name === 'entryPlace' && value.length <= 280) {
+      setEntryPlace(value);
     }
 
     if (name === 'entryText' && value.length <= 1000) {
@@ -79,9 +79,9 @@ const EntryForm = () => {
           <Form onSubmit={handleFormSubmit}>
             <Form.Field>
               <input
-                name="thoughtPlace"
+                name="entryPlace"
                 placeholder="Place"
-                value={thoughtPlace}
+                value={entryPlace}
                 className="form-input w-100"
                 style={{ lineHeight: '1.5', resize: 'vertical' }}
                 onChange={handleChange}

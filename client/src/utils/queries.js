@@ -17,7 +17,7 @@ export const GET_ME = gql`
       thoughts {
         _id
         entryText
-        thoughtPlace
+        entryPlace
         visitDate
         thoughtAuthor
         createdAt
@@ -31,7 +31,7 @@ export const QUERY_ENTRIES = gql`
     thoughts {
       _id
       entryText
-      thoughtPlace
+      entryPlace
       visitDate
       thoughtAuthor
       createdAt
@@ -40,12 +40,12 @@ export const QUERY_ENTRIES = gql`
 `;
 
 export const QUERY_SINGLE_THOUGHT = gql`
-  query getSingleThought($thoughtId: ID!) {
-    thought(thoughtId: $thoughtId) {
+  query getSingleThought($entryId: ID!) {
+    thought(entryId: $entryId) {
       _id
       entryText
       visitDate
-      thoughtPlace
+      entryPlace
       thoughtAuthor
       createdAt
     }

@@ -5,11 +5,10 @@ const thoughtSchema = new Schema({
   entryText: {
     type: String,
     required: 'You need to leave a thought!',
-    minlength: 1,
-    maxlength: 280,
+
     trim: true,
   },
-  entryPlace: {
+  thoughtPlace: {
     type: String,
     required: true,
     trim: true,

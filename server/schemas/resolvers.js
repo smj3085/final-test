@@ -42,8 +42,8 @@ const resolvers = {
 
       return { token, user };
     },
-    addThought: async (parent, { entryText, entryPlace, visitDate, thoughtAuthor }) => {
-      const thought = await Thought.create({ entryText, entryPlace, visitDate, thoughtAuthor });
+    addThought: async (parent, { entryText, thoughtPlace, visitDate, thoughtAuthor }) => {
+      const thought = await Thought.create({ entryText, thoughtPlace, visitDate, thoughtAuthor });
 
       await User.findOneAndUpdate(
         { username: thoughtAuthor },

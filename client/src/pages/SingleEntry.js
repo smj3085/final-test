@@ -24,13 +24,15 @@ const SingleThought = () => {
   }
   return (
     <Segment>
-      <Header as='h1'>{thought.entryPlace}</Header>
+      <Header as='h1'>{thought.thoughtPlace}</Header>
       <p>Visited on {thought.visitDate}</p>
       <Message>
         {thought.entryText}
       </Message>
-
+      <div>
       <Button type='submit' color='teal'>Edit post</Button>
+      <Button type='submit' color='red'>Delete post</Button>
+      </div>
     </Segment>
   );
 };

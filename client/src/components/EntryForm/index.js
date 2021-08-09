@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { ADD_ENTRY } from '../../utils/mutations';
 import { QUERY_ENTRIES } from '../../utils/queries';
-import {Header, Form, Grid, Button, Segment, TextArea, Container, Rating, Icon } from 'semantic-ui-react';
+import { Form, Grid, Button, Segment, TextArea, Container, Rating, Icon } from 'semantic-ui-react';
 import Auth from '../../utils/auth';
 
 const EntryForm = () => {
   const [entryText, setEntryText] = useState('');
-  const [entryPlace, setEntryPlace] = useState('');
+  const [thoughtPlace, setThoughtPlace] = useState('');
   const [visitDate, setVisitDate] = useState('');
 
   const [addThought, { error }] = useMutation(ADD_ENTRY, {
@@ -33,13 +33,13 @@ const EntryForm = () => {
       const { data } = await addThought({
         variables: {
           entryText,
-          entryPlace,
+          thoughtPlace,
           visitDate,
         },
       });
 
       setEntryText('');
-      setEntryPlace('');
+      setThoughtPlace('');
       setVisitDate('');
     } catch (err) {
       console.error(err);
@@ -49,8 +49,8 @@ const EntryForm = () => {
   const handleChange = (event) => {
     const { name, value } = event.target;
 
-    if (name === 'entryPlace' && value.length <= 280) {
-      setEntryPlace(value);
+    if (name === 'thoughtPlace' && value.length <= 280) {
+      setThoughtPlace(value);
     }
 
     if (name === 'entryText' && value.length <= 1000) {
@@ -78,9 +78,9 @@ const EntryForm = () => {
           <Form onSubmit={handleFormSubmit}>
             <Form.Field>
               <input
-                name="entryPlace"
+                name="thoughtPlace"
                 placeholder="Place"
-                value={entryPlace}
+                value={thoughtPlace}
                 className="form-input w-100"
                 style={{ lineHeight: '1.5', resize: 'vertical' }}
                 onChange={handleChange}

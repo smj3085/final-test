@@ -17,13 +17,11 @@ import TripPlanner from './pages/Wishlist';
 import SingleEntry from './pages/SingleEntry';
 
 
-// Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
     uri: '/graphql',
   });
   
-  // Construct request middleware that will attach the JWT token to every request as an `authorization` header
-  const authLink = setContext((_, { headers }) => {
+const authLink = setContext((_, { headers }) => {
     // get the authentication token from local storage if it exists
     const token = localStorage.getItem('id_token');
     // return the headers to the context so httpLink can read them
@@ -43,26 +41,29 @@ const httpLink = createHttpLink({
 
 function App() {
     return (
-        <ApolloProvider client={client}>
-            <Router>
-                <>
-                    <Navbar />
-                    <Route exact path='/' component={Home} />
-                    <Switch>
-                        <Route exact path='/dashboard' component={Dashboard} />
-                        <Route exact path='/expenses' component={Expenses} />
-                        <Route exact path='/tripplanner' component={TripPlanner} />
-                        <Route exact path="/thoughts/:thoughtId">
-                        <SingleEntry />
-            </Route>
-
-
-                    
-                    </Switch>
-                    <Footer />
-                </>
-            </Router>
-        </ApolloProvider>
+      <ApolloProvider client={client}>
+      <Router>
+      <Navbar />
+     <Switch>
+   <Route exact path="/">
+     <Home />
+   </Route>
+   <Route path="/dashboard">
+     <Dashboard />
+   </Route>
+   <Route path="/tripplanner">
+     <TripPlanner />
+   </Route>
+   <Route path="/expenses">
+     <Expenses />
+   </Route>
+   <Route path="/thoughts/:thoughtId">
+     <SingleEntry />
+   </Route>
+   <Footer />
+ </Switch>
+ </Router>
+       </ApolloProvider>
     );
 }
 

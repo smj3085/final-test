@@ -24,6 +24,7 @@ const typeDefs = gql`
   }
 
   type Query {
+    me: User
     users: [User]
     user(username: String!): User
     thoughts(username: String): [Thought]
@@ -34,7 +35,6 @@ const typeDefs = gql`
     addUser(username: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
     addThought(entryText: String!, thoughtPlace: String!, visitDate: String!, thoughtAuthor: String!): Thought
-    removeThought(thoughtId: ID!): Thought
   }
 `;
 

@@ -1,9 +1,6 @@
 const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
 
-// const thoughtSchema = require('./Entry')
-
-
 const userSchema = new Schema({
   username: {
     type: String,
@@ -28,6 +25,12 @@ const userSchema = new Schema({
       ref: 'Thought',
     },
   ],
+  place: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Place',
+    }
+  ]
 });
 
 userSchema.pre('save', async function (next) {

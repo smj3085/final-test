@@ -36,30 +36,3 @@ export const ADD_ENTRY = gql`
     }
   }
 `;
-
-export const ADD_PLACE = gql`
-mutation addPlace(
-  $placeName: String!
-  $placeAddress: String!
-  $placeType: String!
-  $rating: String!
-) {
-  addPlace(
-    placeName: $placeName
-    placeAddress: $placeAddress
-    placeType: $placeType
-    rating: $rating
-  ) {
-    rating
-    createdAt
-    place {
-      placeName
-      placeAddress
-      placeType
-    }
-    user {
-      _id
-    }
-  }
-}
-`;
